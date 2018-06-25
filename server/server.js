@@ -3,11 +3,9 @@ const c = require('ansi-colors');
 const app = require('./app');
 const socket = require('socket.io');
 
-const { generateMessage } = require('./utils/message');
-
+const { generateMessage, generateLocationMessage } = require('./utils/message');
 
 const port = process.env.PORT || 3000;
-
 const server = http.createServer(app);
 const io = socket(server);
 
@@ -22,6 +20,12 @@ io.on('connection', socket => {
   socket.on('createMessage', message => {
     // Sends out the message to the client
     io.emit('newMessage', generateMessage(message.from, message.text));
+  });
+
+  // Listens for location
+  socket.on('createLocationMessage', location => {
+    console.log(location)
+    io.emit('newLocation', generateLocationMessage(location.username, location.lat, location.long));
   });
 
   socket.on('disconnect', () => {

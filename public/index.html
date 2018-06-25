@@ -5,19 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/main.css" type="text/css">
 </head>
 <body>
   <header>
     <h1>Chat App</h1>
   </header>
   <section>
-    <div class="chat-window">
-    </div>
-    <form>
+    
+    <div class="chat-window"></div>
+
+    <form id="message-form">
       <input id="username" type="text" placeholder="What's your name?">
-      <textarea id="new-chat" placeholder="What do you have to say?"></textarea>
+      <input id="new-chat" placeholder="What do you have to say?"></textarea>
       <button>Send</button>
     </form>
+    <button id="send-location">Location</button>
   </section>
 
   <script src="/socket.io/socket.io.js"></script>

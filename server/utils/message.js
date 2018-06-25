@@ -6,6 +6,15 @@ const generateMessage = (who, message) => {
   }
 }
 
+const generateLocationMessage = (user, lat, long) => {
+  return {
+    user,
+    url: `https://www.google.com/maps?q=${lat},${long}`,
+    createdAt: Date.now()
+  }
+}
+
 module.exports = {
-  generateMessage
+  generateMessage,
+  generateLocationMessage
 }

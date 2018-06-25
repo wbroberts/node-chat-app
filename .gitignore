@@ -1,1 +1,4 @@
 node_modules
+.sass-cache
+scss
+public/css/main.css.map

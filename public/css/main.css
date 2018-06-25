@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
+
+.chat-window {
+  background: #ffffff;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  margin-bottom: 20px;
+  overflow: scroll;
+  padding: 0 20px;
+  width: 50%; }
+
+.chat {
+  margin-bottom: 15px; }
+
+.right {
+  text-align: right; }
+
+form input {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 50%; }
+
+body, section, form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%; }
+
+body {
+  background: lightgrey; }
+
+/*# sourceMappingURL=main.css.map */
