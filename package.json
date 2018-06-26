@@ -1,7 +1,7 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple node chat app",
   "main": "server.js",
   "engines": {
     "node": "10.1.0"
@@ -13,7 +13,7 @@
     "server": "nodemon server/server.js",
     "sass": "sass --watch scss/main.scss:public/css/main.css"
   },
-  "author": "",
+  "author": "William",
   "license": "ISC",
   "dependencies": {
     "ansi-colors": "^2.0.1",

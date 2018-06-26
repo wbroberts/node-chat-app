@@ -41,6 +41,8 @@ body {
   flex: 1 1; }
 
 .chat-window {
+  display: flex;
+  flex-direction: column-reverse;
   background: #ffffff;
   flex-basis: 90%;
   overflow: scroll;
@@ -62,8 +64,7 @@ body {
 .chat-time {
   color: #8f8e8e;
   display: block;
-  font-size: .8rem;
-  font-style: italic; }
+  font-size: .9rem; }
 
 .message-box {
   align-content: center;

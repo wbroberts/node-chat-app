@@ -6,7 +6,9 @@ const renderChat = obj => {
     text: obj.text
   });
 
-  chatWindow.innerHTML += chat;
+  const chatDiv = new DOMParser().parseFromString(chat, 'text/html').querySelector('div');
+
+  chatWindow.insertAdjacentElement('afterbegin', chatDiv);
 }
 
 const renderLocation = obj => {
@@ -17,7 +19,9 @@ const renderLocation = obj => {
     url: obj.url
   });
 
-  chatWindow.innerHTML += chat;
+  const chatDiv = new DOMParser().parseFromString(chat, 'text/html').querySelector('div');
+
+  chatWindow.insertAdjacentElement('afterbegin', chatDiv);
 }
 
 const userCountMessage = count => {
