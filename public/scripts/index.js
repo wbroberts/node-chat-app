@@ -3,21 +3,21 @@ const socket = io();
 const messageForm = document.getElementById('message-form');
 const chatWindow = document.querySelector('.chat-window');
 const sendLocation = document.getElementById('send-location');
+const userCounter = document.querySelector('.user-counter');
 
-let username;
+let username = 'User';
 
 // Sends out message when form is submitted
 messageForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  username = e.target[0].value;
-  const message = e.target[1].value;
-
-  socket.emit('createMessage', { from: username, text: message }, (message) => {
+  const message = e.target[0].value;
+  // Send the message to the server
+  socket.emit('createMessage', { from: username, text: message }, message => {
     renderChat(message)
   });
-
-  e.target[1].value = '';
+  // Reset the input 
+  e.target[0].value = '';
 });
 
 //Send location button listening
@@ -25,58 +25,45 @@ sendLocation.addEventListener('click', e => {
   if (!navigator.geolocation) {
     return alert('This feature is not supported by your browser');
   }
-
+  // Make it so button is disabled while fetching location
+  sendLocation.setAttribute('disabled', 'disabled');
+  sendLocation.innerText = 'Sending...';
+  // Fetches the location and sends it to server
   navigator.geolocation.getCurrentPosition(position => {
     socket.emit('createLocationMessage', {
       username,
       lat: position.coords.latitude,
       long: position.coords.longitude
     });
+    // Enable location button
+    sendLocation.removeAttribute('disabled');
+    sendLocation.innerText = 'Location';
   }, error => {
+    // Enable location button
+    sendLocation.removeAttribute('disabled');
+    sendLocation.innerText = 'Location';
     alert('Unable to get your location');
   })
 });
-
-
-
-
+// When a user connects it sends a message
 socket.on('connect', () => {
-  socket.on('connectMessage', message => {
-    renderChat(message);
-  });
+  socket.on('connectMessage', message => renderChat(message));
 });
-
-socket.on('newMessage', message => {
-  renderChat(message)
-});
-
-socket.on('newLocation', location => {
-  const p = document.createElement('p');
-  const a = document.createElement('a');
-  a.setAttribute('target', '_blank');
-  a.setAttribute('href', `${location.url}`);
-  a.textContent = 'View location'
-  p.insertAdjacentElement('afterbegin', a);
-  chatWindow.insertAdjacentElement('beforeend', p);
-});
-
+// When a message comes in it renders it
+socket.on('newMessage', message => renderChat(message));
+// When a location comes in it renders the link
+socket.on('newLocation', location => renderLocation(location));
+// When a new user connects it sends a message and updates the counter
 socket.on('newUser', message => {
-  renderChat(message);
+  renderChat(message[0]);
+  userCounter.textContent = userCountMessage(message[1].totalUsers);
 });
-
-socket.on('disconnect', () => {
-  console.log('disconnected from server');
+// Updates the counter when someone connects
+socket.on('addUser', message => {
+  userCounter.textContent = userCountMessage(message.totalUsers);
 });
-
-const renderChat = obj => {
-  const div = document.createElement('div');
-  div.className = 'chat';
-
-  const p = document.createElement('p');
-  p.textContent = `${obj.from}: ${obj.text}`;
-  div.insertAdjacentElement('afterbegin', p);
-  
-  obj.from === username ? p.className = 'right' : p.className = 'left';
-
-  chatWindow.insertAdjacentElement('beforeend', div);
-}
+// Updates the user count when someone disconnects
+socket.on('removeUser', message => {
+  renderChat(message[0]);
+  userCounter.textContent = userCountMessage(message[1].totalUsers);  
+});

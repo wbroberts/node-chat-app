@@ -4,38 +4,97 @@
   padding: 0; }
 
 a {
-  color: inherit;
   text-decoration: none; }
+
+body {
+  color: #212121;
+  display: flex;
+  flex-direction: column;
+  font-family: "Open Sans", arial, helvetica, sans-serif; }
+
+.content-container {
+  display: flex;
+  height: 100vh;
+  width: 100%; }
+
+.user-container {
+  background: #673AB7;
+  box-shadow: 0 0 5px #212121;
+  flex-basis: 20%;
+  padding: 15px;
+  z-index: 1; }
+
+.user-title {
+  color: #ffffff;
+  font-family: "Hind", arial, helvetica, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 1px; }
+
+.user-counter {
+  color: #D1C4E9; }
+
+.chat-container {
+  background: #D1C4E9;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1; }
 
 .chat-window {
   background: #ffffff;
-  border: 1px solid lightgray;
-  display: flex;
-  flex-direction: column;
-  height: 300px;
-  margin-bottom: 20px;
+  flex-basis: 90%;
   overflow: scroll;
-  padding: 0 20px;
-  width: 50%; }
+  padding: 15px; }
 
-.chat {
-  margin-bottom: 15px; }
+.chat-box {
+  padding-bottom: 15px; }
 
-.right {
-  text-align: right; }
-
-form input {
-  margin-bottom: 20px;
-  padding: 10px;
-  width: 50%; }
-
-body, section, form {
+.chat-header {
   align-items: center;
+  display: flex; }
+
+.chat-title {
+  color: "Open Sans", arial, helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-right: 10px; }
+
+.chat-time {
+  color: #8f8e8e;
+  display: block;
+  font-size: .8rem;
+  font-style: italic; }
+
+.message-box {
+  align-content: center;
   display: flex;
-  flex-direction: column;
+  bottom: 0;
+  justify-content: space-between;
+  padding: 15px;
+  position: relative;
   width: 100%; }
 
-body {
-  background: lightgrey; }
+.message-input {
+  border: none;
+  flex-basis: 80%;
+  font-family: "Open Sans", arial, helvetica, sans-serif;
+  font-size: 1rem;
+  padding: 10px; }
+
+.button {
+  background: #673AB7;
+  border: none;
+  color: #ffffff;
+  font-family: "Open Sans", arial, helvetica, sans-serif;
+  font-size: 1rem;
+  padding: 10px 15px;
+  transition: background 300ms; }
+
+.button:hover {
+  background: #512DA8;
+  cursor: pointer; }
+
+.button:disabled {
+  background: #D1C4E9; }
 
 /*# sourceMappingURL=main.css.map */

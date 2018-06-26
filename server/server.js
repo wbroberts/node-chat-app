@@ -3,18 +3,25 @@ const c = require('ansi-colors');
 const app = require('./app');
 const socket = require('socket.io');
 
-const { generateMessage, generateLocationMessage } = require('./utils/message');
+const { generateMessage, generateLocationMessage, generateUsers } = require('./utils/message');
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socket(server);
 
+// To count how many users are in chatroom 
+let userCounter = 0;
+
 io.on('connection', socket => {
-  console.log('New user connected to server');
+  // Increase the user count
+  userCounter++;
+
+  console.log(userCounter + ' users');
   // Greeting message when a user connects
   socket.emit('connectMessage', generateMessage('Admin', 'Welcome to the chatroom'));
   // Message to all users that a new user joined
-  socket.broadcast.emit('newUser', generateMessage('Admin', 'A new user joined the room'));
+  socket.broadcast.emit('newUser', [generateMessage('Admin', 'A new user joined the chatroom'), generateUsers(userCounter)]);
+  socket.emit('addUser', generateUsers(userCounter));
 
   // Listens for a new message
   socket.on('createMessage', message => {
@@ -24,13 +31,16 @@ io.on('connection', socket => {
 
   // Listens for location
   socket.on('createLocationMessage', location => {
-    console.log(location)
     io.emit('newLocation', generateLocationMessage(location.username, location.lat, location.long));
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected')
-  })
+    // Decrease the user count
+    userCounter--;
+    socket.broadcast.emit('removeUser', [generateMessage('Admin', 'A user left the chatroom'), generateUsers(userCounter)]);
+
+    console.log(userCounter + ' users');
+  });
 
 });
 
