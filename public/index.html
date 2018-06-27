@@ -3,61 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chat</title>
+  <title>Join | Chat App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./css/main.css" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Hind:400,500|Open+Sans:400,600" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
 </head>
 <body>
-
-  <div class="content-container">
-    <section class="user-container">
-      <h2 class="user-title">People</h2>
-      <p class="user-counter"></p>
-      <ol class="user-list"> </ol>
-    </section>
-
-    <section class="chat-container">
-      <div class="chat-window"></div>
-      <div class="message-container">
-        <form id="message-form" class="message-box">
-          <!-- <input id="username" type="text" placeholder="What's your name?"> -->
-          <input id="new-chat" placeholder="What do you have to say?" class="message-input" autofocus autocomplete="off">
-          <button type="submit" class="button button-send">Send</button>
-          <button id="send-location" type="button" class="button button-location">Location</button>
-        </form>
-      </div> 
-    </section>
+  <div class="container">
+    <div class="login-container">
+      <form class="login-form" action="./chat.html">
+        <h2>Join a Chatroom</h2>
+        <input id="username" type="text" placeholder="Name" name="name" autofocus autocomplete="off">
+        <input id="chatroom-topic" type="text" placeholder="Topic" name="topic" autocomplete="off">
+        <button type="submit" class="button">Join Chat</button>
+      </form>
+    </div>
   </div>
-
-  <script id="message-template" type="text/template">
-    <div class="chat-box">
-      <div class="chat-header">
-        <h4 class="chat-title">{{user}}</h4>
-        <span class="chat-time">{{time}}</span>
-      </div>
-      <div class="chat-text">
-        <p>{{text}}</p>
-      </div>
-    </div>
-  </script>
-
-  <script id="location-template" type="text/template">
-    <div class="chat-box">
-      <div class="chat-header">
-        <h4 class="chat-title">{{user}}</h4>
-        <span class="chat-time">{{time}}</span>
-      </div>
-      <div class="chat-location">
-        <p><a href="{{url}}" target="_blank">View Location</a></p>
-      </div>
-    </div>
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="./scripts/functions.js"></script>
-  <script src="./scripts/index.js"></script>
 </body>
 </html>
